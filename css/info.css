@@ -1,0 +1,48 @@
+div.indicator-div {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all 0.5s;
+    
+}
+p.indicator-box {
+    font-size: 20px;
+    border-radius: 15px;
+    padding: 10px;
+    background: linear-gradient(to right, #0059ff, #8e0ef6);
+    color: white;
+    font-weight: bold;
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, 110%);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+@keyframes popup {
+    0% {transform: translate(-50%, 110%); opacity: 0;}
+    5% {opacity: 0.2;}
+    10% {transform: translate(-50%, 0%); opacity: 1;}
+    50% {transform: translate(-50%, 0%); opacity: 1;}
+    80% {transform: translate(-50%, 0%); opacity: 1;}
+    90% {opacity: 0.2;}
+    100%{transform: translate(-50%, 110%); opacity: 0;}
+}
+
+
+/*audio image*/
+img.audio-image {
+    display: block;
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 60px;
+    height: auto;
+    opacity: 0.8;
+    transition: all 0.5s;
+    animation: audio-down 1s forwards ease-in-out;
+    cursor: pointer;
+}

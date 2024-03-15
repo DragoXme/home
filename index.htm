@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
+    <link id="favicon" rel="icon" type="image/x-icon" href="img/newtab.png">
+    <link id="searchEngineCss" rel="stylesheet" href="css/bing.css">
+    <link rel="stylesheet" href="css/info.css">
+ <!--font-->
+
+
+<style>
+    @font-face {
+    font-family: 'Placeholder';
+    src: url('fonts/Placeholder.otf');
+    }
+  @font-face {
+    font-family: 'Greet';
+    src: url('fonts/Time.otf');
+    } /*Custom fonts*/
+    body {
+        background-color: #000;
+        background-position: center;
+        height: 100%;
+        user-select: none;
+    }
+    div.search {
+        display: block;
+        position: relative;
+        text-align: center;
+        top: 20px;
+        left: 30%;
+        width: 40%;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    div.search input {
+        font-size: 25px;
+        border: 0px solid black;
+        background-color: #0000;
+        outline: none;
+        transition: all 0.2s;
+        width: calc(100% - 35px);
+        position: relative;
+        left: 18px;
+        font-family: 'Placeholder', sans-serif;
+    }
+    div.search input::placeholder {
+        font-family: 'Placeholder', sans-serif;
+    }
+    div.search div.quick {
+        display: block;
+        position: absolute;
+        top: 70px;
+    }
+    button.quick-search {
+        display: inline-block;
+        position: relative;
+        font-size: 20px;
+        font-family: 'Placeholder';
+        padding: 5px;
+        border-radius: 10px;
+    }
+    button.search {
+        font-size: 30px;
+        background-color: #0000;
+        border: 0px solid black;
+        color: #e0b3ff;
+        position: absolute;
+        left: 5px;
+        top: 5%;
+        height: 90%;
+        opacity: 0.6;
+        transition: opacity 0.3s;
+    }
+    button.search:hover {
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 0.3s;
+    }
+    button.search img {
+        height: 30px;
+        display: block;
+        position: relative;
+        width: auto;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    img {
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    img.back {
+        display: block;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+        filter: blur(11px);
+        height: 100%;
+        width: 100%;
+        opacity: 0.5;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    div.menu-div {
+        position: fixed;
+        background-color: #0000;
+        top: 10px;
+        right: 10px;
+        border: 0px solid black;
+    }
+    div.menu-div:hover {
+    }
+    img.menu-image {
+        transition: transform 5s;
+        height: 60px;
+        width: 60px;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        transition: transform 0.3s ease;
+        background-color: #fff2;
+        border-radius: 50%;
+        padding: 10px;
+        cursor: pointer;
+        transform: rotate(0deg);
+    }
+    img.menu-image:hover {
+        transition: transform 0.2s ease;
+    }
+    img.menu-image:active {
+    }
+    div.links {
+        background-color: #e0b3ff33;
+        border-radius: 50px;
+        position: fixed;
+        display: block;
+        padding: 10px;
+        width: 60px;
+        left: 20px;
+        top: 5%;
+        overflow-x: hidden;
+        height: 55px;
+        overflow-y: hidden;
+        transition: height 0.3s, top 0.3s;
+        line-height: 1cm;
+        z-index: 2;
+    }
+    div.links:hover {
+        height: 95%;
+        transition: height 0.4s, top 0.4s;
+        top: 1%;
+        overflow-y: auto;
+    }
+    div.links::-webkit-scrollbar {
+    width: 0px; /* Set the width of the scroll bar */
+    }
+    button.link {
+        border: 0px solid black;
+        cursor: pointer;
+        width: 60px;
+        height: 60px;
+        transition: all 0.2s;
+        background-color: #e0b3ff33;
+        border-radius: 10px;
+        position: relative;
+    }
+    button.link:hover {
+        transition: all 0.2s;
+        background-color: #e0b3ff55;
+        animation: buttonhover 0.6s linear 0s infinite;
+        
+    }
+    @keyframes buttonhover {
+        0%, 100% {transform: rotate(0deg) translateY(0px)}
+        25% {transform: rotate(10deg) translateY(-10px) translateX(1px)}
+        50% {transform: rotate(0deg) translateY(-10px) translateX(0px)}
+        75% {transform: rotate(-10deg) translateY(-10px) translateX(-1px)}
+    }
+    button.link:active {
+        background-color: #e0b3ff33;
+        transition: all 0.2s;
+    }
+    img.link {
+        opacity: 1;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        text-align: center;
+        width: 100%;
+        height: auto;
+        transition: all 0.2s;
+    }
+    #greetingAndTime {
+        position: relative;
+        width: 30%;
+        margin-top: 30px;
+        left: 35%;
+        transition: all 0.3s;
+        cursor: default;
+        font-family: 'Greet', sans-serif;
+    }
+@media only screen and (max-width: 787px) {
+    #greetingAndTime {
+        width: 100%;
+        left: 20%;
+        transition: all 0.3s;
+    }
+    .time {
+        font-size: 50px;
+    }
+    .greeting {
+        font-size: 20px;
+    }
+    .date {
+        font-size: 20px
+    }
+    img.link {
+        height: 30px;
+        width: auto;
+    }
+    img.link:hover {
+        height: 33px;
+    }
+    button.link {
+        width: 50px;
+        height: 50px;
+    }
+    div.links {
+        width: 50px;
+        overflow-x: hidden;
+        height: 40px;
+    }
+    div.links:hover {
+        height: 650px;
+        top: 10px;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .greeting {
+        font-size: 30px;
+    }
+    
+}
+    div.links:hover img.remove-animation {
+        animation: downrotate 0.7s linear;
+        animation-iteration-count: infinite;
+        animation-fill-mode: none;
+    }
+    @keyframes downrotate {
+        0% {transform: rotate(360deg);}
+        100% {transform: rotate(720deg);}
+        
+    }
+    #down-arrow {
+        height: auto;
+        width: 100%;
+        background-color: #0000;
+        border: 0px solid black;
+    }
+    img.down-arrow {
+        height: auto;
+        width: 100%;
+        transition: all 0.3s;
+    }
+    button.search-engine {
+        background-color: #0000;
+        border: 0px solid black;
+        border-radius: 10px;
+        position: relative;
+        left: 47%;
+        width: 80px;
+        height: auto;
+        margin-top: 30px;
+        transition: all 0.3s;
+    }
+    button.search-engine:hover {
+        background-color: #e0b3ff33;
+        transition: all 0.3s;
+        margin-left: 5px;
+    }
+    button.search-engine:active {
+        background-color: #e0b3ff11;
+        margin-left: 0px;
+        transition: all 0.3s;
+    }
+    img.search-engine {
+        width: 100%;
+        height: auto;
+        transition: opacity 0.1s;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    button.search-engine:active img.search-engine {
+        opacity: 0;
+        transition: opacity 0.1s;
+    }
+    img.search-engine, img.down-arrow, img.back, img.link, button.search img, img.ai-link {
+        pointer-events: none;
+    }
+    div.ai-link-div {
+        background-color: #000;
+        background-image: linear-gradient(90deg, #1904ffda, #a200ffd5);
+        position: fixed;
+        right: 0px;
+        width: 60px;
+        height: 60px;
+        padding: 20px 5px 20px 20px;
+        transition: all 0.3s;
+        bottom: 5%;
+        border-radius: 50px 0 0 50px;
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        overflow-y: scroll;
+    }
+    div.ai-link-div:hover {
+        width: 200px;
+        background-color: #000;
+        transition: all 0.3s;
+    }
+    ::-webkit-scrollbar{
+        display: none;
+    }
+    button.ai-button {
+        background-color: #e0b3ff00;
+        border: 0px;
+        border-radius: 20px;
+        padding: 5px;
+        transform: translate(0px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+    }
+    button.ai-button:hover {
+        transform: translateY(-10px);
+        transition: all 0.3s;
+    }
+    img.ai-link {
+        height: 60px;
+        width: auto;
+        transition: all 0.3s;
+    }
+    button.ai-button:hover img.ai-link {
+        transition: all 0.3s;
+        filter: drop-shadow(0px 6px 3px #000000a3);
+    }
+    button.ai-button:active img.ai-link {
+        transition: all 0.3s;
+        filter: drop-shadow(0px 3px 1px #000);
+        transform: translateY(5px);
+    }
+    contextmenu {
+        color: blue;
+        background-color: green;
+        position: fixed;
+    }
+    @media only screen and (max-width: 1000px) {
+        img.back {
+            height: 100%;
+            width: auto;
+        }
+    }
+    @media only screen and (max-width: 1200px) {
+        #greetingAndTime {
+        width: 44%;
+        left: 28%;
+    }
+    }
+    
+</style>
+</head>
+
+<body>
+    <img class="back" src="img/winn.png">
+
+    <div id="greetingAndTime">
+        <div class="time" id="time"></div>
+        <div class="date" id="date"></div>
+        <div class="greeting" id="greeting"></div>
+      </div>      
+
+      <script src="clock.js"></script>
+
+
+
+
+
+      
+      <button id="switch-engine" class="search-engine">
+        <img id="search-engine-image" class="search-engine" src="img/bing-search.png">
+      </button>
+      
+      <div class="search" id="search-box-div">
+        <form id="search-form" action="https://www.bing.com/search" method="GET" target="_self">
+          <button type="submit" class="search"><img src="img/search-bing.png" id="input-search-button"></button>
+          <input id="searchbox" type="text" name="q" class="search" placeholder="What's on your mind?" autocomplete="off" autofocus>
+          <div class="quick">
+          <button type="button" class="quick-search" data-value="Weather">Weather</button>
+          <button type="button" class="quick-search" data-value="Calculator">Calculator</button>
+          <button type="button" class="quick-search" data-value="Translate">Translate</button>
+          <button type="button" class="quick-search" data-value="Roll dice">Roll Dice</button>
+          <button type="button" class="quick-search" data-value="Internet speed test">Speed test</button>
+          </div>
+        </form>
+      </div>
+      
+      
+
+
+
+
+<div class="links" id="linksContainer">
+
+
+<button id="down-arrow">
+  <img src="img/down-arrow.png" id="down-arrow-circle" class="down-arrow remove-animation">
+</button>
+
+
+<button class="link add-button" style="animation: buttonhover 0s;" id="add-link-button">
+  <img src="img/add-link.png" class="link">
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="ai-link-div">
+
+<button id="ai-button1" class="ai-button" data-url="https://www.bing.com/chat">
+    <img src="img/ai-bing.png" class="ai-link">
+</button>
+
+<button id="ai-button2" class="ai-button" data-url="https://gemini.google.com/">
+    <img src="img/ai-gimini.png" class="ai-link">
+</button>
+
+<button id="ai-button3" class="ai-button" data-url="https://chat.openai.com/">
+    <img src="img/ai-gpt.png" class="ai-link">
+</button>
+
+
+</div>
+
+<div id="indicatorDiv" class="indicator-div">
+    <p class="indicator-box" id="indicatorBox">Sample for now</p>
+</div>
+
+<!--audio-->
+<audio class="back-audio" id="audioUnmute" style="display: none;">
+    <source src="audio/unmute.mp3" type="audio/mpeg">
+</audio>
+<audio class="back-audio" id="audioOffline" style="display: none;">
+    <source src="audio/offline_notification.mp3" type="audio/mpeg">
+</audio>
+<audio class="back-audio" id="audioNotification" style="display: none;">
+    <source src="audio/notification_toast.mp3" type="audio/mpeg">
+</audio>
+
+<!--menu-->
+<div class="menu-div" id="menuDiv">
+<img src="img/menu.png" class="menu-image" id="menuImage">
+
+<img class="audio-image" id="audioImage" alt="audioimage" src="img/audio-off.png" style="transform: translateX(80px);">
+</div>
+
+<script src="info.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
