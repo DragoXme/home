@@ -50,6 +50,7 @@ window.addEventListener('offline', () => {
     let audioUnmute = document.getElementById("audioUnmute");
     let audioOffline = document.getElementById("audioOffline");
     let audioNotification = document.getElementById("audioNotification");
+    let audioLock = document.getElementById("audioLock");
 
     // Function to play the unmute audio
     function playUnmuteAudio() {
@@ -65,6 +66,9 @@ window.addEventListener('offline', () => {
     function playNotificationAudio() {
         audioNotification.play();
     }
+    function playAudioLock() {
+        audioLock.play();
+    }
 
 
 
@@ -79,7 +83,8 @@ document.addEventListener("DOMContentLoaded", function() {
     let audioUnmute = document.getElementById("audioUnmute");
     let audioOffline = document.getElementById("audioOffline");
     let audioNotification = document.getElementById("audioNotification");
-    let audioElements = [audioUnmute, audioOffline, audioNotification];
+    let audioLock = document.getElementById("audioLock");
+    let audioElements = [audioUnmute, audioOffline, audioNotification, audioLock];
 
     // Function to toggle the master audio mute state
     function toggleMasterAudio() {
@@ -92,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     audio.currentTime = 0;
                 }
             });
+            audioLock.muted = true;
 
             // Save state in memory
             localStorage.setItem("audioState", "muted");
@@ -131,19 +137,71 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+
 //menu script
 let menuDiv = document.getElementById("menuDiv");
 let menuImage = document.getElementById("menuImage");
+let lockIcon = document.getElementById("lockIcon");
 
 menuImage.addEventListener( "click", function() {
     if (audioImage.style.transform === "translateX(80px)") {
-    audioImage.style.transform = "translateX(0px)";
     menuImage.style.transform = "rotate(90deg)";
-    console.log("if");
+    audioImage.style.transform = "translateX(0px)";
+    setTimeout(() => {
+        lockIcon.style.transform = "translate(0, 80px)";
+    }, 50);
     }
     else {
-        audioImage.style.transform = "translateX(80px)";
-        console.log("else");
         menuImage.style.transform = "rotate(0deg)";
+        lockIcon.style.transform = "translate(80px, 80px)";
+        setTimeout(() => {
+            audioImage.style.transform = "translateX(80px)";
+        }, 50);
     }
+});
+
+let lockImage = document.getElementById("lockImage");
+let lockComponentOne = document.getElementById("lockComponentOne");
+let lockComponentTwo = document.getElementById("lockComponentTwo");
+let greetingAndTime = document.getElementById("greetingAndTime");
+
+function lockScreenOn() {
+    document.documentElement.requestFullscreen();
+    lockImage.style.top = "0";
+    lockComponentOne.style.bottom = "0";
+    lockComponentTwo.style.top = "0";
+    greetingAndTime.style.transform = "translate(-50%, 50%)";
+    lockComponentTwo.style.animation = "componentTwo 3s infinite ease-in-out";
+    lockComponentOne.style.animation = "componentOne 3s infinite ease-in-out";
+    lockImage.addEventListener("click", lockScreenOff);
+    lockComponentOne.addEventListener("click", lockScreenOff);
+    lockComponentTwo.addEventListener("click", lockScreenOff);
+    playAudioLock();
+}
+function lockScreenOff() {
+    document.exitFullscreen();
+    lockImage.style.top = "-100%";
+    lockComponentOne.style.bottom = "calc(100% + 14vw)";
+    greetingAndTime.style.transform = "translate(-50%, 0)";
+    lockComponentTwo.style.top = "-100%";
+    lockComponentOne.style.animation = "none";
+    lockComponentTwo.style.animation = "none";
+    audioLock.pause();
+    audioLock.currentTime = 0;
+}
+
+
+
+
+//call lock screen function
+document.addEventListener("DOMContentLoaded", function() {
+    let lockIcon = document.getElementById("lockIcon");
+
+    // Function to handle click on the lock icon
+    function handleLockIconClick() {
+        lockScreenOn();
+    }
+
+    // Add click event listener to the lock icon
+    lockIcon.addEventListener("click", handleLockIconClick);
 });
