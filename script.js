@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function switchToBing() {
     searchForm.action = "https://www.bing.com/search";
     searchEngineImage.src = "img/bing-search.png";
-    textinside.placeholder = "Discover a World of Knowledge with Bing...";
+    textinside.placeholder = "Explore the web with Bing...";
     inputSearchButton.src = "img/search-bing.png";
     downArrow.src = "img/down-arrow.png";
     csschange.href = "css/bing.css";
