@@ -22,12 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 window.addEventListener('online', () => {
     console.log("online");
-    infoBox.textContent = "Back Online!";
-    infoBox.style.animation = "popup 2s ease-in-out";
-    playNotificationAudio();
-    setTimeout(() => {
-        infoBox.style.animation = "none";
-    }, 2000);
+    popupNotification("Back Online!");
 });
 
 window.addEventListener('offline', () => {
@@ -177,6 +172,12 @@ function lockScreenOn() {
     lockComponentOne.addEventListener("click", lockScreenOff);
     lockComponentTwo.addEventListener("click", lockScreenOff);
     playAudioLock();
+    //event listener to spacekey
+    function keyPressListener(event) {
+            lockScreenOff();
+    }
+    document.addEventListener("keydown", keyPressListener);
+    window.keyPressListener = keyPressListener;
 }
 function lockScreenOff() {
     document.exitFullscreen();
@@ -188,6 +189,7 @@ function lockScreenOff() {
     lockComponentTwo.style.animation = "none";
     audioLock.pause();
     audioLock.currentTime = 0;
+    document.removeEventListener("keydown", window.keyPressListener);
 }
 
 
@@ -205,3 +207,14 @@ document.addEventListener("DOMContentLoaded", function() {
     // Add click event listener to the lock icon
     lockIcon.addEventListener("click", handleLockIconClick);
 });
+
+
+
+function popupNotification(Text) {
+    infoBox.textContent = Text;
+        infoBox.style.animation = "popup 2s ease-in-out";
+        playNotificationAudio();
+        setTimeout(() => {
+            infoBox.style.animation = "none";
+        }, 2000);
+}

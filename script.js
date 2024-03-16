@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function switchToGoogle() {
     searchForm.action = "https://www.google.com/search";
     searchEngineImage.src = "img/google-search.png";
-    textinside.placeholder = "Explore the Web with Google...";
+    textinside.placeholder = "Explore the web with Google...";
     inputSearchButton.src = "img/search-google.png";
     downArrow.src = "img/down-arrow2.png";
     csschange.href = "css/google.css";
