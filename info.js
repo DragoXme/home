@@ -168,6 +168,8 @@ function lockScreenOn() {
     greetingAndTime.style.transform = "translate(-50%, 50%)";
     lockComponentTwo.style.animation = "componentTwo 3s infinite ease-in-out";
     lockComponentOne.style.animation = "componentOne 3s infinite ease-in-out";
+    document.documentElement.style.cursor = "none"; //hide cursor
+    keepScreenOn();
     lockImage.addEventListener("click", lockScreenOff);
     lockComponentOne.addEventListener("click", lockScreenOff);
     lockComponentTwo.addEventListener("click", lockScreenOff);
@@ -187,6 +189,8 @@ function lockScreenOff() {
     lockComponentTwo.style.top = "-100%";
     lockComponentOne.style.animation = "none";
     lockComponentTwo.style.animation = "none";
+    document.documentElement.style.cursor = ""; //show cursor
+    doNotKeepScreenOn();
     audioLock.pause();
     audioLock.currentTime = 0;
     document.removeEventListener("keydown", window.keyPressListener);
@@ -217,4 +221,42 @@ function popupNotification(Text) {
         setTimeout(() => {
             infoBox.style.animation = "none";
         }, 2000);
+}
+
+
+
+
+
+
+//keepscreen on off ooooooooooooo
+let wakeLock = null;
+
+function keepScreenOn() {
+  if (wakeLock === null) {
+    if ('wakeLock' in navigator) {
+      navigator.wakeLock.request('screen')
+      .then(function(wakeLockObj) {
+        wakeLock = wakeLockObj;
+        console.log('Screen wake lock is active');
+      })
+      .catch(function(error) {
+        console.error('Failed to create wake lock: ' + error);
+      });
+    } else {
+      console.error('Wake lock API is not supported');
+    }
+  }
+}
+
+function doNotKeepScreenOn() {
+  if (wakeLock !== null) {
+    wakeLock.release()
+    .then(function() {
+      wakeLock = null;
+      console.log('Screen wake lock released');
+    })
+    .catch(function(error) {
+      console.error('Failed to release wake lock: ' + error);
+    });
+  }
 }
