@@ -139,18 +139,18 @@ let menuImage = document.getElementById("menuImage");
 let lockIcon = document.getElementById("lockIcon");
 
 menuImage.addEventListener( "click", function() {
-    if (audioImage.style.transform === "translateX(80px)") {
+    if (audioImage.style.transform === "translate(80px, 80px)") {
     menuImage.style.transform = "rotate(90deg)";
-    audioImage.style.transform = "translateX(0px)";
+    lockIcon.style.transform = "translate(0, 0px)";
     setTimeout(() => {
-        lockIcon.style.transform = "translate(0, 80px)";
+        audioImage.style.transform = "translate(0, 80px)";
     }, 50);
     }
     else {
         menuImage.style.transform = "rotate(0deg)";
-        lockIcon.style.transform = "translate(80px, 80px)";
+        audioImage.style.transform = "translate(80px, 80px)";
         setTimeout(() => {
-            audioImage.style.transform = "translateX(80px)";
+            lockIcon.style.transform = "translate(80px, 0px)";
         }, 50);
     }
 });
