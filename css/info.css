@@ -1,0 +1,99 @@
+div.indicator-div {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: all 0.5s;
+    
+}
+p.indicator-box {
+    font-size: 20px;
+    border-radius: 15px;
+    padding: 10px;
+    background: linear-gradient(to right, #0059ff, #8e0ef6);
+    color: white;
+    font-weight: bold;
+    display: block;
+    position: fixed;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, 110%);
+    transition: all 0.5s;
+    opacity: 0;
+}
+
+@keyframes popup {
+    0% {transform: translate(-50%, 110%); opacity: 0;}
+    5% {opacity: 0.2;}
+    10% {transform: translate(-50%, 0%); opacity: 1;}
+    50% {transform: translate(-50%, 0%); opacity: 1;}
+    80% {transform: translate(-50%, 0%); opacity: 1;}
+    90% {opacity: 0.2;}
+    100%{transform: translate(-50%, 110%); opacity: 0;}
+}
+
+
+/*audio image*/
+img.audio-image {
+    display: block;
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    width: 60px;
+    height: auto;
+    opacity: 0.8;
+    transition: all 0.5s;
+    animation: audio-down 1s forwards ease-in-out;
+    cursor: pointer;
+}
+img.lock-image {
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: -100%;
+    left: 0;
+    transition: top 0.5s;
+    /*
+    top: 0;
+    */
+
+}
+img.lock-component-one {
+    z-index: 12;
+    position: fixed;
+    bottom: calc(100% + 14vw);
+    left: 50%;
+    width: 14vw;
+    height: auto;
+    transform: translate(-7vw, 50%);
+    transition: bottom 0.5s;
+    /*
+    animation: componentOne 3s infinite ease-in-out;
+    bottom: 0;
+    */
+}
+img.lock-component-two {
+    z-index: 11;
+    position: fixed;
+    top: -100%;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    transform: translate(-50%, -50%);
+    transition: top 0.5s;
+    /*
+    top: 0;
+    animation: componentTwo 3s infinite ease-in-out;
+    */
+}
+@keyframes componentOne {
+    0%{transform: translate(-7vw, 50%);}
+    50% {transform: translate(-7vw, 60%);}
+    100%{transform: translate(-7vw, 50%);}
+}
+@keyframes componentTwo {
+    0%{transform: translate(-50%, -50%);}
+    50% {transform: translate(-50%, -35%);}
+    100%{transform: translate(-50%, -50%);}
+}
